@@ -22,7 +22,7 @@ body {
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
   border-radius: 5px;
 }
 
@@ -35,6 +35,29 @@ img {
     "header header header"
     "sidenav content anuncio"
     "footer footer footer";
+}
+
+@media (max-width: 1200px) {
+  .estrutura {
+    grid-template-columns: minmax(150px, 1fr) 3fr;
+    grid-template-areas:
+      "header header header"
+      "sidenav content content"
+      "sidenav anuncio anuncio"
+      "footer footer footer ";
+  }
+}
+
+@media (max-width: 760px) {
+  .estrutura {
+    grid-template-columns: minmax(150px, 1fr) 3fr;
+    grid-template-areas:
+      "header header header"
+      "sidenav sidenav sidenav"
+      "content content content"
+      "anuncio anuncio anuncio"
+      "footer footer footer ";
+  }
 }
 
 /* HEADER */
@@ -77,6 +100,22 @@ img {
   margin-left: 30px;
 }
 
+@media (max-width: 760px) {
+  .header {
+    grid-template-columns: auto;
+    justify-content: center;
+  }
+  .logo {
+    margin-bottom: 20px;
+  }
+  .header nav a {
+    font-size: 1em;
+  }
+  .header li + li {
+    margin-left: 10px;
+  }
+}
+
 /* SIDENAV */
 
 .sidenav {
@@ -84,6 +123,7 @@ img {
   background: #fafbfc;
   padding: 30px;
 }
+
 .sidenav li a {
   display: block;
   min-width: 60px;
@@ -100,6 +140,42 @@ img {
   background: #b07dfb;
 }
 
+@keyframes seta {
+  from {
+    right: 30px;
+  }
+  to {
+    right: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .sidenav ul {
+    display: flex;
+  }
+  .sidenav li {
+    flex: 1 0 60px;
+  }
+  .sidenav {
+    position: relative;
+    padding: 0px 30px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .sidenav::after {
+    content: "🠒";
+    position: absolute;
+    top: 5px;
+    right: 30px;
+    color: rgba(0, 0, 0, 0.7);
+
+    animation: seta 0.5s ease-in 0s infinite alternate;
+  }
+  .sidenav li a {
+    margin: 30px 30px 30px 0;
+  }
+}
 /* CONTENT */
 .content {
   grid-area: content;
@@ -112,8 +188,14 @@ img {
   gap: 30px;
 }
 
+@media (max-width: 600px) {
+  .content {
+    grid-template-columns: auto;
+  }
+}
 .col-wide {
   grid-column: 1 / -1;
+  margin: 0 auto;
 }
 
 .img-1 {
@@ -230,6 +312,10 @@ p {
   align-content: start;
   padding: 30px;
   gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.anuncios img {
+  margin: 0 auto;
 }
 
 /* FOOTER */
